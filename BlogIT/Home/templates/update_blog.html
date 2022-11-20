@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+
+<div class="container mt-5">
+
+    {% comment %} <a href="{% url 'see_blog' %}" class="btn btn-warning">View Your blogs</a> {% endcomment %}
+
+    <form method="post" class="mt-5 pt-5 mb-5 pb-5"
+          enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-12">
+                <label>Blog title</label>
+                <input type="text" class="form-control"  value="{{blog_obj.title}}"placeholder="Enter title" name="title">
+            </div>
+
+            <div class="col-md-12">
+                {{form.media}}
+                {{form.as_p}}
+            </div>
+            <div class="col-md-12">
+                <label>Blog summary in 5-10 words</label>
+                <input type="text" class="form-control" value="{{blog_obj.summary}}" placeholder="Enter summary " name="summary">
+            </div>
+
+            <div class="col-md-12">
+                <label>Cover image</label>
+                <input type="file" name="image" class="form-control" value="{{blog_obj.cover_image}}">
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Update Blog</button>
+
+    </form>
+    <div>{{message}}</div>
+
+</div>
+
+
+{% endblock %}

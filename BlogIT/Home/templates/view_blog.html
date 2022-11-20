@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+
+<section class="mt-5 pt-5">
+
+    
+    {% if blog_objs %}
+    <div class="text-content text-center"><p><h5> Hey {{request.user}} here are your blogs!</h5></p></div>
+    
+    {% else %}
+    
+    <div class="text-content text-center"><p><h5> Hey {{request.user}},  looks like there are no blogs! add some</h5></p></div>
+    {% endif %}
+
+    <div class="container">
+       
+        <table class="table">
+        <thead>
+          {% comment %} <tr>
+            <th scope="col">No</th>
+            <th scope="col">Blog title</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Action</th>
+          </tr> {% endcomment %}
+        </thead>
+        <tbody>
+            {% for blog in blog_objs %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td><b>{{blog.title}}</b></td>
+            <td>{{blog.created_at}}</td>
+            <td>
+                <a href="{%  url 'blog_update' blog.slug %}" class="btn btn-info">Update</a>
+                <a href="{% url 'blog_delete' blog.id %}" class="btn btn-danger">Delete</a>
+
+
+            </td>
+          </tr>
+          {% endfor %}
+         
+
+          </tbody>
+          </table>
+          
+    </div>
+</section>
+
+
+
+{% endblock %}

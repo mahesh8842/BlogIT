@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+
+<div class="container mt-5">
+
+    {% comment %} <a href="{% url 'see_blog' %}" class="btn btn-warning">View Your blogs</a> {% endcomment %}
+
+    <form method="post" class="mt-5 pt-5 mb-5 pb-5"
+          enctype="multipart/form-data" action="{% url 'add_blog' %}">
+          
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-12">
+                <label>Enter blog title</label>
+                <input type="text" class="form-control" placeholder="Enter title" name="title">
+            </div>
+
+            <div class="col-md-12">
+                {{form.media}}
+                {{form.as_p}}
+            </div>
+            <div class="col-md-12">
+                <label>Enter blog summary in 5-10 words</label>
+                <input type="text" class="form-control" placeholder="Enter summary " name="summary">
+            </div>
+
+            <div class="col-md-12">
+                <label>Choose a cover image</label>
+                <input type="file" name="image" class="form-control" >
+            </div>
+
+        </div>
+
+        
+        <button type="submit" class="btn btn-primary mt-4">Create Blog</button>
+        <br><br>
+        <a class="btn btn-danger" href="{% url 'home' %}">cancel</a>
+        {% comment %} <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
+            
+          </li> {% endcomment %}
+
+
+    </form>
+    <div>{{message}}</div>
+
+</div>
+
+
+{% endblock %}
